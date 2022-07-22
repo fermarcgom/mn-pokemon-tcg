@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cards-table
+      author: fermarcgom
+      changes:
+        - sqlFile:
+            path: changelog/01-create-cards-table.sql
+            relativeToChangelogFile: true
+            splitStatements: false
