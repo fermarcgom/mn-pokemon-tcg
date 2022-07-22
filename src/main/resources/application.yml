@@ -1,0 +1,22 @@
+micronaut:
+  application:
+    name: mnPokemonTcg
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: ${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/postgres
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: ''
+netty:
+  default:
+    allocator:
+      max-order: 3
+jpa.default.properties.hibernate.hbm2ddl.auto: update
