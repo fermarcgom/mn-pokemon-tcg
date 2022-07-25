@@ -1,9 +1,12 @@
 package io.github.fermarcgom.persistence.domain;
 
+import io.github.fermarcgom.dto.Type;
 import io.micronaut.core.annotation.Introspected;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +24,8 @@ public class Card {
     @Column(name = "pokemon_name", nullable = false, updatable = false)
     private String pokemonName;
     @Column(name = "pokemon_type", nullable = false, updatable = false)
-    private String pokemonType;
+    @Enumerated(value = EnumType.STRING)
+    private Type pokemonType;
     @Column(name = "pokemon_hp", nullable = false)
     private Integer pokemonHp;
     @Column(name = "evolved_from")
@@ -45,11 +49,11 @@ public class Card {
         this.pokemonName = pokemonName;
     }
 
-    public String getPokemonType() {
+    public Type getPokemonType() {
         return pokemonType;
     }
 
-    public void setPokemonType(String pokemonType) {
+    public void setPokemonType(Type pokemonType) {
         this.pokemonType = pokemonType;
     }
 

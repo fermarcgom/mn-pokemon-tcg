@@ -36,4 +36,4 @@ jpa:
       - "io.github.fermarcgom.persistence"
     properties:
       hibernate:
-        show-sql: false
+        show-sql: true
