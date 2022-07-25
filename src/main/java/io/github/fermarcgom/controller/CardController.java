@@ -1,4 +1,4 @@
-package io.github.fermarcgom;
+package io.github.fermarcgom.controller;
 
 import io.github.fermarcgom.persistence.domain.Card;
 import io.github.fermarcgom.service.CardService;
@@ -10,7 +10,7 @@ import io.micronaut.security.rules.SecurityRule;
 
 import java.util.List;
 
-@Secured(SecurityRule.IS_ANONYMOUS)
+@Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/card")
 public class CardController {
 

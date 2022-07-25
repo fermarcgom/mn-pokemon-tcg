@@ -18,11 +18,11 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "card_id")
     private Integer id;
-    @Column(name = "pokemon_name")
+    @Column(name = "pokemon_name", nullable = false, updatable = false)
     private String pokemonName;
-    @Column(name = "pokemon_type")
+    @Column(name = "pokemon_type", nullable = false, updatable = false)
     private String pokemonType;
-    @Column(name = "pokemon_hp")
+    @Column(name = "pokemon_hp", nullable = false)
     private Integer pokemonHp;
     @Column(name = "evolved_from")
     private String evolvedFrom;

@@ -1,5 +1,13 @@
 databaseChangeLog:
   - changeSet:
+      id: create-users
+      author: fermarcgom
+      changes:
+        - sqlFile:
+            path: changelog/00-create-authentication-users.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+  - changeSet:
       id: create-cards-table
       author: fermarcgom
       changes:

@@ -21,6 +21,8 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation("io.micronaut.rxjava3:micronaut-rxjava3")
+    implementation("io.micronaut.rxjava3:micronaut-rxjava3-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.testcontainers:junit-jupiter")
