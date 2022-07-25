@@ -1,4 +1,4 @@
-INSERT INTO cards (pokemon_name, pokemon_type1, pokemon_hp, evolved_from, image_link)
+INSERT INTO cards (pokemon_name, pokemon_type, pokemon_hp, evolved_from, image_link)
 VALUES
     ('Charmander', 'Fire', 60, null, 'https://i0.wp.com/pkmncards.com/wp-content/uploads/en_US-PGO-008-charmander.jpg'),
     ('Charmeleon', 'Fire', 90, 'Charmander', 'https://i0.wp.com/pkmncards.com/wp-content/uploads/en_US-PGO-009-charmeleon.jpg'),

@@ -13,11 +13,12 @@ repositories {
 dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.liquibase:micronaut-liquibase")
     implementation("io.micronaut.security:micronaut-security-jwt")
-//    implementation("io.micronaut.sql:micronaut-hibernate-jpa")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("jakarta.annotation:jakarta.annotation-api")
     runtimeOnly("ch.qos.logback:logback-classic")
