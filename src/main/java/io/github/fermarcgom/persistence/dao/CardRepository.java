@@ -5,10 +5,13 @@ import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CardRepository extends CrudRepository<Card, Integer> {
 
     @Override
     List<Card> findAll();
+
+    Optional<Card> findByPokemonName(String pokemonName);
 }
