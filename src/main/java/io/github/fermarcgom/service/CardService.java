@@ -13,6 +13,8 @@ import io.micronaut.data.model.Pageable;
 import io.micronaut.http.HttpStatus;
 import jakarta.inject.Singleton;
 
+import javax.transaction.Transactional;
+
 @Singleton
 public class CardService {
 
@@ -49,6 +51,15 @@ public class CardService {
         card.setImageLink(cardCreateRequest.imageLink());
 
         cardRepository.save(card);
+    }
+
+    @Transactional
+    public void deleteCard(Integer id) {
+        Card card = cardRepository.findById(id)
+                .orElseThrow(() -> new PokemonCardServiceException(HttpStatus.NOT_FOUND,
+                        "ERR_CARD_NOT_FOUND",
+                        String.format("There is no card with id %d", id)));
+        cardRepository.delete(card);
     }
 
     private void validateEvolvedFrom(String evolvedFrom) {

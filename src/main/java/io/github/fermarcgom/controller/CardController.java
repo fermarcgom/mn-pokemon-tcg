@@ -8,6 +8,7 @@ import io.github.fermarcgom.service.CardService;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Delete;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.http.annotation.Post;
@@ -45,5 +46,10 @@ public class CardController {
     @Status(HttpStatus.CREATED)
     public void createCard(@Body CardCreateRequest card) {
         cardService.createCard(card);
+    }
+
+    @Delete("{id}")
+    public void delete(@PathVariable @Min(value = 0) Integer id) {
+        cardService.deleteCard(id);
     }
 }
