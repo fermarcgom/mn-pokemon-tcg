@@ -4,7 +4,6 @@ import io.github.fermarcgom.persistence.dao.UserRepository;
 import io.github.fermarcgom.persistence.domain.User;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.HttpRequest;
-import io.micronaut.security.authentication.AuthenticationProvider;
 import io.micronaut.security.authentication.AuthenticationRequest;
 import io.micronaut.security.authentication.AuthenticationResponse;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
@@ -19,12 +18,12 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @Singleton
-public class JDBCAuthenticationProvider implements AuthenticationProvider {
+public class AuthenticationProvider implements io.micronaut.security.authentication.AuthenticationProvider {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JDBCAuthenticationProvider.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AuthenticationProvider.class);
     private final UserRepository userRepository;
 
-    public JDBCAuthenticationProvider(UserRepository userRepository) {
+    public AuthenticationProvider(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
