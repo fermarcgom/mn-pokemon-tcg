@@ -10,10 +10,18 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    TEST_CONTAINERS_VERSION = '1.17.2'
+    POSTGERSQL_VERSION = '42.3.6'
+    MOCKITO_VERSION = '4.6.1'
+    ASSERTJ_VERSION = '3.23.1'
+}
+
 dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.security:micronaut-security-annotations")
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
+
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.liquibase:micronaut-liquibase")
@@ -23,13 +31,17 @@ dependencies {
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("io.micronaut.rxjava3:micronaut-rxjava3")
     implementation("io.micronaut.rxjava3:micronaut-rxjava3-http-client")
-    runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("org.postgresql:postgresql")
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:postgresql")
-    testImplementation("org.testcontainers:testcontainers")
     implementation("io.micronaut:micronaut-validation")
 
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.postgresql:postgresql:$POSTGERSQL_VERSION")
+
+    testImplementation("org.testcontainers:junit-jupiter:$TEST_CONTAINERS_VERSION")
+    testImplementation("org.testcontainers:postgresql:$TEST_CONTAINERS_VERSION")
+    testImplementation("org.testcontainers:testcontainers:$TEST_CONTAINERS_VERSION")
+    testImplementation("org.mockito:mockito-core:$MOCKITO_VERSION")
+    testImplementation("org.mockito:mockito-junit-jupiter:$MOCKITO_VERSION")
+    testImplementation("org.assertj:assertj-core:$ASSERTJ_VERSION")
 }
 
 

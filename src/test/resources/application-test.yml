@@ -1,4 +1,6 @@
 datasources:
   default:
-    url: jdbc:tc:postgresql:12:///postgres
+    url: jdbc:tc:postgresql://mn-pokemon-tcg
+    username: sa
+    password: sa
     driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
