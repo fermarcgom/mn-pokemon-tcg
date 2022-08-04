@@ -1,6 +1,5 @@
-package io.github.fermarcgom;
+package io.github.fermarcgom.auth;
 
-import io.github.fermarcgom.auth.AuthenticationProvider;
 import io.github.fermarcgom.persistence.dao.UserRepository;
 import io.github.fermarcgom.persistence.domain.User;
 import io.micronaut.security.authentication.Authentication;
@@ -13,12 +12,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 class AuthenticationProviderTest {
 
     @Mock
@@ -38,15 +40,15 @@ class AuthenticationProviderTest {
 
     @Test
     void whenPasswordIsCorrectThenAuthenticationIsSuccessful() {
-        TestSubscriber<AuthenticationResponse> suscriber = new TestSubscriber<>();
+        TestSubscriber<AuthenticationResponse> subscriber = new TestSubscriber<>();
 
         authenticationProvider.authenticate(null, new UsernamePasswordCredentials("user@test.com", "password"))
-                .subscribe(suscriber);
+                .subscribe(subscriber);
 
-        suscriber.assertComplete();
-        suscriber.assertNoErrors();
-        suscriber.assertValueCount(1);
-        AuthenticationResponse response = suscriber.values().get(0);
+        subscriber.assertComplete();
+        subscriber.assertNoErrors();
+        subscriber.assertValueCount(1);
+        AuthenticationResponse response = subscriber.values().get(0);
         assertThat(response.isAuthenticated()).isTrue();
         Authentication authentication = response.getAuthentication().orElse(null);
         assertThat(authentication).isNotNull();
@@ -57,25 +59,25 @@ class AuthenticationProviderTest {
 
     @Test
     void whenPasswordIsIncorrectThenAuthenticationIsFailing() {
-        TestSubscriber<AuthenticationResponse> suscriber = new TestSubscriber<>();
+        TestSubscriber<AuthenticationResponse> subscriber = new TestSubscriber<>();
 
         authenticationProvider.authenticate(null, new UsernamePasswordCredentials("user@test.com", "wrong"))
-                .subscribe(suscriber);
+                .subscribe(subscriber);
 
-        suscriber.assertNotComplete();
-        suscriber.assertError((exception) -> "Wrong username or password".equals(exception.getMessage()));
+        subscriber.assertNotComplete();
+        subscriber.assertError((exception) -> "Wrong username or password".equals(exception.getMessage()));
     }
 
     @Test
     void whenUserDoesNotExistThenAuthenticationIsFailing() {
-        TestSubscriber<AuthenticationResponse> suscriber = new TestSubscriber<>();
+        TestSubscriber<AuthenticationResponse> subscriber = new TestSubscriber<>();
         Mockito.when(userRepository.findByEmail("user2@test.com"))
                 .thenReturn(Optional.empty());
 
         authenticationProvider.authenticate(null, new UsernamePasswordCredentials("user2@test.com", "wrong"))
-                .subscribe(suscriber);
+                .subscribe(subscriber);
 
-        suscriber.assertNotComplete();
-        suscriber.assertError((exception) -> "Wrong username or password".equals(exception.getMessage()));
+        subscriber.assertNotComplete();
+        subscriber.assertError((exception) -> "Wrong username or password".equals(exception.getMessage()));
     }
 }

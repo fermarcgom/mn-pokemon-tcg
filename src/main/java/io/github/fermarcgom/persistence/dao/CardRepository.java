@@ -9,9 +9,11 @@ import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.data.repository.PageableRepository;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
+@Transactional
 public interface CardRepository extends PageableRepository<Card, Integer>, JpaSpecificationExecutor<Card> {
     Optional<Card> findByPokemonName(String pokemonName);
 

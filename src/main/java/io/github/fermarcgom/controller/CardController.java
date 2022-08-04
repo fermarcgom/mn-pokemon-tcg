@@ -44,8 +44,8 @@ public class CardController {
 
     @Post
     @Status(HttpStatus.CREATED)
-    public void createCard(@Body CardCreateRequest card) {
-        cardService.createCard(card);
+    public Integer createCard(@Body CardCreateRequest card) {
+        return cardService.createCard(card);
     }
 
     @Delete("{id}")

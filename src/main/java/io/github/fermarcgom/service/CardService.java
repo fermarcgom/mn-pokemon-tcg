@@ -29,7 +29,7 @@ public class CardService {
     public CardPageResponse getCards(Integer page, Integer size, Type type) {
         int pageRequested = page == null ? 0 : page;
         int sizeRequested = size == null ? 20 : size;
-        return cardMapper.map(cardRepository.findAll(Pageable.from(pageRequested, sizeRequested)));
+        return cardMapper.map(cardRepository.findAll(Pageable.from(pageRequested, sizeRequested), type));
     }
 
     public CardResponse getCard(Integer id) {
@@ -40,7 +40,7 @@ public class CardService {
         return cardMapper.map(card);
     }
 
-    public void createCard(CardCreateRequest cardCreateRequest) {
+    public Integer createCard(CardCreateRequest cardCreateRequest) {
         validateEvolvedFrom(cardCreateRequest.evolvedFrom());
 
         Card card = new Card();
@@ -50,7 +50,9 @@ public class CardService {
         card.setEvolvedFrom(cardCreateRequest.evolvedFrom());
         card.setImageLink(cardCreateRequest.imageLink());
 
-        cardRepository.save(card);
+        card = cardRepository.save(card);
+
+        return card.getId();
     }
 
     @Transactional
