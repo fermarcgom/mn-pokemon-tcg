@@ -24,7 +24,7 @@ public interface CardRepository extends PageableRepository<Card, Integer>, JpaSp
     class Specifications {
         public static Specification<Card> withType(Type type) {
             return (root, query, criteriaBuilder) -> {
-                return type == null ? criteriaBuilder.conjunction() : criteriaBuilder.equal(root.get("pokemonType"), type.name());
+                return type == null ? criteriaBuilder.conjunction() : criteriaBuilder.equal(root.get("pokemonType"), type);
             };
         }
     }

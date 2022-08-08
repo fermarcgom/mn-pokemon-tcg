@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  pokemon-tcg:
+    image: mn-pokemon-tcg
+    environment:
+      PG_PASSWORD: secret
+      PG_JDBC_URL: jdbc:postgresql://db:5432/mn-pokemon-tcg
+      APP_PORT: 8080
+      ENABLE_LIQUIBASE: "true"
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres:13.3-alpine
+    environment:
+      # Create db
+      POSTGRES_DB: mn-pokemon-tcg
+      # Use postgres/secret user/password credentials
+      POSTGRES_PASSWORD: secret
+      # enforce UTC timezone
+      TZ: UTC
+    volumes:
+      - mn-pokemon-tcg-data-local:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer:4
+    ports:
+      - "8081:8080"
+
+# permanent storage of data.
+# > docker volume rm postgres_mn-pokemon-tcg-data-local
+volumes:
+  mn-pokemon-tcg-data-local:

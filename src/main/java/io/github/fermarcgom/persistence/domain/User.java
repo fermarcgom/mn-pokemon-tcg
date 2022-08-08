@@ -1,5 +1,7 @@
 package io.github.fermarcgom.persistence.domain;
 
+import io.micronaut.core.annotation.Introspected;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
+@Introspected
 @Table(name = "users")
 public class User {
 

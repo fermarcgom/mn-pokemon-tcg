@@ -53,7 +53,6 @@ java {
     targetCompatibility = JavaVersion.toVersion("17")
 }
 
-graalvmNative.toolchainDetection = false
 micronaut {
     runtime("netty")
     testRuntime("junit5")
@@ -63,5 +62,19 @@ micronaut {
     }
 }
 
+graalvmNative {
+    toolchainDetection = true
+}
 
+tasks.named("dockerBuild") {
+    images = ["mn-pokemon-tcg:latest"]
+}
 
+tasks.named("dockerBuildNative") {
+    images = ["mn-pokemon-tcg-native:latest"]
+}
+
+task unitTest (type: Test) {
+    exclude "**/*ITTest.class"
+    exclude "**/ApplicationTest.class"
+}
